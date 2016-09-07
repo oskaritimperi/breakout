@@ -1,0 +1,15 @@
+CC = i686-w64-mingw32-gcc
+RAYLIB = ../raylib
+INCDIR = -I$(RAYLIB)/src
+CFLAGS += -Wall $(INCDIR)
+LDFLAGS += $(LIBDIR)
+LIBRAYLIB = $(RAYLIB)/release/win32/mingw32/libraylib.a
+LIBGLFW3 = $(RAYLIB)/src/external/glfw3/lib/win32/libglfw3.a
+LDLIBS += $(LIBRAYLIB) $(LIBGLFW3) -lgdi32
+
+breakout.exe: main.c timer.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+.PHONY: clean
+clean:
+	rm -f breakout
